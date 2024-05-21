@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+
+QMainWindow {
+    background-color: #2E2E2E;
+}
+
+QTextEdit, QTableWidget, QTreeWidget, QLabel, QListView {
+    background-color: #2E2E2E;
+    color: #FFFF00;
+    border: 1px solid #555555;
+}
+
+QMenuBar {
+    background-color: #444444;
+    color: #FFFF00;
+}
+
+QMenuBar::item {
+    background-color: #444444;
+    color: #FFFF00;
+}
+
+QMenu {
+    background-color: #444444;
+    color: #FFFF00;
+    border: 1px solid #555555;
+}
+
+QMenu::item {
+    background-color: #444444;
+    color: #FFFF00;
+    padding: 3px 20px 3px 20px;
+}
+
+QMenu::item:selected {
+    background-color: #666666;
+}
+
+QStatusBar {
+    background-color: #444444;
+    color: #FFFF00;
+}
+
+QTabWidget::pane {
+    border: 1px solid #555555;
+}
+
+QTabWidget::tab-bar {
+    left: 5px;
+}
+
+QTabBar::tab {
+    background-color: #444444;
+    color: #FFFF00;
+    padding: 5px;
+    margin: 1px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    background-color: #555555;
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px;
+}
+
+QMessageBox {
+    background-color: #333333;
+}
+
+QMessageBox QLabel {
+    color: #FFFF00;
+}
+
+QMessageBox QPushButton {
+    background-color: #444444;
+    color: #FFFF00;
+    padding: 5px;
+    border: 1px solid #555555;
+    border-radius: 2px;
+    min-width: 70px;
+}
+
+QMessageBox QPushButton:hover {
+    background-color: #555555;
+}
+
+/* QTableWidget Headers */
+QHeaderView::section {
+    background-color: #444444;
+    color: #FFFF00;
+    padding: 5px;
+    border: 1px solid #555555;
+}
+
+
+
+QTableWidget {
+    background-color: #2E2E2E;
+    gridline-color: #555555;
+    color: #FFFF00;
+}
+
+/* QTableWidget Vertical Headers */
+QTableWidget QHeaderView::vertical {
+    background-color: #444444;
+}
+
+QTableWidget QHeaderView::section:vertical {
+    background-color: #444444;
+    color: #FFFF00;
+    border: 1px solid #555555;
+}
+
+/* QTableWidget Vertical Header Items */
+QTableWidget QHeaderView::section:vertical {
+    background-color: #444444;
+    color: #FFFF00;
+}
+
+/* Corner Widget of QTableWidget */
+QTableWidget QTableCornerButton::section {
+    background-color: #444444;
+    border: 1px solid #555555;
+}
+
+QAbstractItemView {
+    background-color: #2b2b2b;
+    selection-background-color: #5e5e5e;
+    color: #eeeeee;
+    border: 1px solid #5e5e5e;
+}
+
+QAbstractItemView::item {
+    padding: 5px;
+}
+QAbstractItemView::item:selected {
+    background-color: #555555;
+}
+
+QScrollBar:vertical {
+    border: 1px solid #2A2929;
+    background: #2A2929;
+    width: 10px;
+    margin: 22px 0 22px 0;
+}
+QScrollBar::handle:vertical {
+    background: #5B5A5A;
+    min-height: 20px;
+}
+QScrollBar::add-line:vertical {
+    border: none;
+    background: #3A3939;
+    height: 20px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:vertical {
+    border: none;
+    background: #3A3939;
+    height: 20px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}
+QScrollBar:horizontal {
+    border: 1px solid #2A2929;
+    background: #2A2929;
+    height: 10px;
+    margin: 0 22px 0 22px;
+}
+QScrollBar::handle:horizontal {
+    background: #5B5A5A;
+    min-width: 20px;
+}
+QScrollBar::add-line:horizontal {
+    border: none;
+    background: #3A3939;
+    width: 20px;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+QScrollBar::sub-line:horizontal {
+    border: none;
+    background: #3A3939;
+    width: 20px;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
+}
+QScrollBar::left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+    background: none;
+}
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetNoConstraint</enum>
+        </property>
+        <item>
+         <widget class="QTextEdit" name="uiTxtQuery">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="acceptRichText">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTabWidget" name="tabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="uiTabResult">
+           <attribute name="title">
+            <string>Result</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QTableWidget" name="table">
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+              </property>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>true</bool>
+              </attribute>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMaximumSize</enum>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
+          </property>
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <property name="bottomMargin">
+           <number>2</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;ThreatHunting Workbench&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Author: &lt;br/&gt;&lt;/span&gt;Antonio Blescia (TheThMando)&lt;span style=&quot; font-weight:600;&quot;&gt;&lt;br/&gt;Email:&lt;br/&gt;&lt;/span&gt;a.blescia@nocommentlab.it&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="textFormat">
+               <enum>Qt::MarkdownText</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="resources/resources.qrc">:/img/nocommentlab.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTreeWidget" name="uiTreeRules">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>300</height>
+           </size>
+          </property>
+          <property name="animated">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string notr="true">n.d.</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="uiListFields">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionInfo"/>
+    <addaction name="uiBtnExit"/>
+   </widget>
+   <widget class="QMenu" name="uiBtnExecute">
+    <property name="title">
+     <string>Execute</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="uiBtnExecute"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="uiBtnExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
