@@ -1,6 +1,6 @@
 ---
 
-rules_path: "./workbench/rules/"
+rules_path: "./rules/"
 rumbledb:
   url: "http://localhost:9090/jsoniq"
   materialization_cap: 1000

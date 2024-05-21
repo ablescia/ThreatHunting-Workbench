@@ -19,10 +19,10 @@ class Workbench(QMainWindow):
 
         # Remove unused pylint warning
         _ = resources_rc
-        self.configuration = FileManager.deserialize_configuration_file("./workbench/config.yml")
+        self.configuration = FileManager.deserialize_configuration_file("./config.yml")
 
         # Load the interface.ui file
-        uic.loadUi('./workbench/interface.ui', self)
+        uic.loadUi('./interface.ui', self)
 
         self.custom_completer = CustomCompleter()
         # Connect uiBtnExecute to the onClickUiBtnExecuteEvent function
