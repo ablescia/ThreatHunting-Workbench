@@ -1,5 +1,3 @@
-import json
-
 import argparse
 from utils.GrokFunnel import GrokFunnel
 from utils.LogParser import LogParser
@@ -14,12 +12,12 @@ def main():
 
 
     grok_funnel = GrokFunnel()
-    loaded_groks = grok_funnel.load_grok_patterns('./syslog_parser/custom_patterns.yaml',
+    grok_funnel.load_grok_patterns('./syslog_parser/custom_patterns.yaml',
                                                   args.logtype)
 
-    log_parser = LogParser(args.input, loaded_groks, args.output)
+    log_parser = LogParser(args.input, grok_funnel, args.output)
     log_parser.do_analyze()
-    log_parser.convert_to_ndjson()
+    log_parser.do_convert_to_ndjson()
 
 if __name__ == "__main__":
     main()

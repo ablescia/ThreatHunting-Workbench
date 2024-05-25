@@ -3,9 +3,8 @@ import json
 
 class LogParser:
 
-    def __init__(self, input_log_path, grok_patterns, output_ndjson_path):
-        #self.input_log_path = input_log_path
-        self.grok_patterns = grok_patterns
+    def __init__(self, input_log_path, grok_funnel, output_ndjson_path):
+        self.grok_patterns = grok_funnel.grok_patterns
         self.output_ndjson_path = output_ndjson_path
         self.input_log_file_content = []
         self.parsed_logs = []
@@ -32,7 +31,7 @@ class LogParser:
                     return match
         return None
 
-    def convert_to_ndjson(self):
+    def do_convert_to_ndjson(self):
         with open(self.output_ndjson_path, 'w') as out_file_stream:
             for log in self.parsed_logs:
                 out_file_stream.write(json.dumps(log) + '\n')
