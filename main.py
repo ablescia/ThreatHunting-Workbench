@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem,QMessage
 
 from PyQt5.QtCore import QDir, Qt
 from flatten_json import flatten
+from PyQt5.QtGui import QColor
 
 
 class Workbench(QMainWindow):
@@ -38,7 +39,10 @@ class Workbench(QMainWindow):
         self.uiTreeRules.itemDoubleClicked.connect(self.__on_ui_tree_rules_item_double_clicked)
 
         # Register the double click event for the uiListFields item
-        self.uiListFields.itemDoubleClicked.connect(self.__on_list_widget_item_double_clicked)
+        #self.uiListFields.itemDoubleClicked.connect(self.__on_list_widget_item_double_clicked)
+        
+        # Register the single click event for the uiListFields item
+        self.uiListFields.itemClicked.connect(self.__on_list_widget_item_clicked)
 
         # Populate the uiTreeRules Widget with the rule set
         self.__fill_tree_widget(self.uiTreeRules,
@@ -55,19 +59,30 @@ class Workbench(QMainWindow):
 
         self.document_fields = None
         
+    def __on_list_widget_item_clicked(self, item):
+        modifiers = QApplication.keyboardModifiers()
+        if modifiers == Qt.AltModifier:
+            selected_index = self.document_fields.index(item.text())
+            if self.table.isColumnHidden(selected_index) is False:
+                self.table.hideColumn(selected_index)
+                item.setData(Qt.TextColorRole, QColor("#404040"))
+            else:
+                self.table.showColumn(selected_index)
+                item.setData(Qt.TextColorRole, QColor("#e7e9e7"))
+            
+        elif modifiers & Qt.ShiftModifier:
+            cursor = self.custom_completer.textCursor()
+            #cursor.movePosition(cursor.End)
+            self.custom_completer.setTextCursor(cursor)
+
+            # Insert text at cursor position
+            self.custom_completer.insertPlainText(item.text())
 
     def __on_ui_tree_rules_item_double_clicked(self, item):
         if item.text(1) == "File":
             file_path = item.data(0, Qt.UserRole)
             self.custom_completer.setText(FileManager.read_file_content(file_path, 'r', 'utf-8'))
-    
-    def __on_list_widget_item_double_clicked(self, item):
-        cursor = self.custom_completer.textCursor()
-        #cursor.movePosition(cursor.End)
-        self.custom_completer.setTextCursor(cursor)
-
-        # Insert text at cursor position
-        self.custom_completer.insertPlainText(item.text())
+         
 
     def add_items_to_listwidget(self, list_widget, items):
         """
@@ -144,11 +159,9 @@ class Workbench(QMainWindow):
             if isinstance(json_data['values'][0], dict):
                 json_data = [flatten(item,separator=".") for item in json_data['values']]
                 if json_data:
-                    self.table.setRowCount(len(json_data))
-                    self.table.setColumnCount(len(json_data[0]))
-                    
-                    
+                    self.table.setRowCount(len(json_data))                   
                     self.document_fields = sorted(list({key for d in json_data for key in d.keys()}))
+                    self.table.setColumnCount(len(self.document_fields))
                     self.custom_completer.setWordlist(self.document_fields)
                     self.add_items_to_listwidget(self.uiListFields, self.document_fields)
 

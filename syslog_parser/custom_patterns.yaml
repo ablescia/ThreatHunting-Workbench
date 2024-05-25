@@ -1,0 +1,20 @@
+# custom_patterns.yaml
+AUTH_LOG:
+  - name: sshd_success_login_using_password
+    patterns:
+      - '%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sshd(?:\[%{POSINT:auth_pid}\])?: Accepted password for %{DATA:ssh_event_user} from %{IPORHOST:auth_src_ip} port %{POSINT:port}'
+  - name: sshd_failed_login_using_password_invalid_user
+    patterns:
+      - '%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sshd(?:\[%{POSINT:auth_pid}\])?: Failed password for invalid user %{DATA:ssh_event_user} from %{IPORHOST:auth_src_ip} port %{POSINT:port}'
+  - name: sshd_failed_login_using_password
+    patterns:
+      - '%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sshd(?:\[%{POSINT:auth_pid}\])?: Failed password for %{DATA:ssh_event_user} from %{IPORHOST:auth_src_ip} port %{POSINT:port} ssh2'
+  - name: user_added_to_system
+    patterns:
+      - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} useradd(?:\[%{POSINT:useradd_pid}\])?: new user: name=%{DATA:useradd_username}, UID=%{DATA:useradd_user_uid}, GID=%{POSINT:useradd_user_gid}, home=%{DATA:useradd_user_home}, shell=%{DATA:useradd_user_shell}, from=%{DATA:useradd_from_terminal}$'
+  - name: user_added_to_group
+    patterns:
+      - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} usermod(?:\[%{POSINT:usermod_pid}\])?: add ''%{DATA:usermod_user}'' to group ''%{DATA:usermod_dstgroup}''$'
+  - name: sudo_execute_priv_command
+    patterns:
+      - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sudo: %{DATA:sudo_user} : TTY=%{DATA:sudo_tty} ; PWD=%{DATA:sudo_pwd} ; USER=%{DATA:sudo_user_become} ; COMMAND=%{GREEDYDATA:sudo_command}$'
