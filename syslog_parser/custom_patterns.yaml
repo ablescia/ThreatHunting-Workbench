@@ -15,6 +15,11 @@ AUTH_LOG:
   - name: user_added_to_group
     patterns:
       - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} usermod(?:\[%{POSINT:usermod_pid}\])?: add ''%{DATA:usermod_user}'' to group ''%{DATA:usermod_dstgroup}''$'
-  - name: sudo_execute_priv_command
+  - name: su_sudo_priv_esc_attempt
     patterns:
-      - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sudo: %{DATA:sudo_user} : TTY=%{DATA:sudo_tty} ; PWD=%{DATA:sudo_pwd} ; USER=%{DATA:sudo_user_become} ; COMMAND=%{GREEDYDATA:sudo_command}$'
+      # May 25 17:22:44 nbantble sudo[188993]: antonio : TTY=pts/4 ; PWD=/home/antonio ; USER=root ; COMMAND=/usr/bin/chown antonio:antonio /tmp/auth.log
+      # May 25 17:44:03 nbantble sudo[213442]:  antonio : 3 incorrect password attempts ; TTY=pts/4 ; PWD=/home/antonio ; USER=root ; COMMAND=/usr/bin/cat /tmp/auth.log
+      - '^%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} sudo(?:\[%{POSINT:auth_pid}\])?: %{DATA:sudo_user} :( %{DATA:sudo_error} ;)? TTY=%{DATA:sudo_tty} ; PWD=%{DATA:sudo_pwd} ; USER=%{DATA:sudo_user_become} ; COMMAND=%{GREEDYDATA:sudo_command}$'
+      # May 25 17:22:11 nbantble su[188227]: (to antonio) antonio on pts/4
+      # May 25 17:21:56 nbantble su[187909]: FAILED SU (to antonio) antonio on pts/4
+      - '%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} su(?:\[%{POSINT:auth_pid}\])?: (%{DATA:su_error} )?\(to %{DATA:su_user}\) %{DATA:su_from_user} on %{DATA:su_tty}$'
