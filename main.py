@@ -83,6 +83,10 @@ class Workbench(QMainWindow):
             file_path = item.data(0, Qt.UserRole)
             self.custom_completer.setText(FileManager.read_file_content(file_path, 'r', 'utf-8'))
          
+    def __show_all_column_table(self, qtablewidget):
+        column_count = self.qtablewidget.columnCount()
+        for column in range(column_count):
+            self.qtablewidget.setColumnHidden(column, False)
 
     def add_items_to_listwidget(self, list_widget, items):
         """
@@ -152,6 +156,7 @@ class Workbench(QMainWindow):
 
                 for col_num, header in enumerate(self.document_fields):
                     self.table.setHorizontalHeaderItem(col_num, QTableWidgetItem(header))
+                    self.table.setColumnHidden(col_num, False)
                 for row_num, row_data in enumerate(json_data["values"]):
                     self.table.setItem(row_num, 0, QTableWidgetItem(str(row_data)))
 
@@ -167,6 +172,7 @@ class Workbench(QMainWindow):
 
                     for col_num, header in enumerate(self.document_fields):
                         self.table.setHorizontalHeaderItem(col_num, QTableWidgetItem(header))
+                        self.table.setColumnHidden(col_num, False)
 
                     for row_num, row_data in enumerate(json_data):
                         for col_num, key in enumerate(self.document_fields):

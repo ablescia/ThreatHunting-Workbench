@@ -3,4 +3,4 @@
 rules_path: "./rules/"
 rumbledb:
   url: "http://localhost:9090/jsoniq"
-  materialization_cap: 1000
+  materialization_cap: 397500
